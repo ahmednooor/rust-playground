@@ -1,0 +1,6 @@
+[package]
+name = "employee_record"
+version = "0.1.0"
+authors = ["ahmednooor <m.ahmednoor7@yahoo.com>"]
+
+[dependencies]
