@@ -209,6 +209,11 @@ fn main() {
     }
     
     println!("\nOutput Text: {}", output_text);
+
+    println!("");
+    String::from(
+        take_input("Press any key to exit ...")
+    );
 }
 
 fn rotate_rotors(
