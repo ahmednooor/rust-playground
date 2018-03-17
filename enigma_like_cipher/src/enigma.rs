@@ -119,6 +119,15 @@ pub mod enigma {
                 enigma.setting[i].1 = temp.0.clone();
                 temp.1 = enigma.setting[i].0.clone();
             }
+            for rotor_position in rotor_positions {
+                let temp = enigma.setting[rotor_position].1.clone();
+                enigma.setting[rotor_position].1 = enigma.setting[rotor_position].0.clone();
+                for i in 0..enigma.setting.len() {
+                    if enigma.setting[i].0 == temp {
+                        enigma.setting[i].1 = enigma.setting[i].0.clone();
+                    }
+                }
+            }
             for i in 0..(enigma.num_of_rotors + 1) {
                 enigma.rotors.push(enigma.setting);
             }
