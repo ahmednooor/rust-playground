@@ -27,7 +27,11 @@ fn main() {
 
 }
 
-fn bubble_sort(vec: &Vec<i32>) -> Vec<i32> {
+fn bubble_sort<T>(vec: &Vec<T>) -> Vec<T>
+    where T: 
+        std::ops::Mul<Output = T> +
+        std::cmp::PartialOrd +
+        Copy {
     let mut vec = vec.clone();
     
     for _i in 0..vec.len() - 1 {
@@ -43,8 +47,12 @@ fn bubble_sort(vec: &Vec<i32>) -> Vec<i32> {
     vec
 }
 
-fn merge(mut left_half_array: Vec<i32>, mut right_half_array: Vec<i32>) -> Vec<i32> {
-    let mut result_array: Vec<i32> = Vec::new();
+fn merge<T>(mut left_half_array: Vec<T>, mut right_half_array: Vec<T>) -> Vec<T>
+    where T: 
+        std::ops::Mul<Output = T> +
+        std::cmp::PartialOrd +
+        Copy {
+    let mut result_array: Vec<T> = Vec::new();
     
     loop {
         if left_half_array.len() > 0
@@ -74,7 +82,11 @@ fn merge(mut left_half_array: Vec<i32>, mut right_half_array: Vec<i32>) -> Vec<i
     result_array
 }
 
-fn merge_sort(vec: &Vec<i32>) -> Vec<i32> {
+fn merge_sort<T>(vec: &Vec<T>) -> Vec<T> 
+    where T: 
+        std::ops::Mul<Output = T> +
+        std::cmp::PartialOrd +
+        Copy {
     let vec = vec.clone();
     let arr_len = vec.len() - 1 as usize;
     
@@ -84,13 +96,13 @@ fn merge_sort(vec: &Vec<i32>) -> Vec<i32> {
     } else {
         let middle: usize = arr_len / 2 as usize;
         
-        let mut left_half_array: Vec<i32> = Vec::new();
+        let mut left_half_array: Vec<T> = Vec::new();
         for i in 0..(middle + 1) {
             left_half_array.push(vec[i]);
         }
         left_half_array = merge_sort(&left_half_array);
         
-        let mut right_half_array: Vec<i32> = Vec::new();
+        let mut right_half_array: Vec<T> = Vec::new();
         for i in (middle + 1)..(arr_len + 1) {
             right_half_array.push(vec[i]);
         }

@@ -3,7 +3,12 @@
 // live version: https://repl.it/repls/UnfinishedMarvelousWebportal
 
 fn main() {
-    let unsorted: Vec<i32> = vec![6, 7, 1, -4, -1, 2, -2, 3, 2, 2, 0, -3, 5, 0, 4, -3, 8, 6];
+    // let unsorted: Vec<f64> = vec![6.7456, 7.1456, 1.010, -4.54, -1.95467, 2.104, -2.2324, 3.0154, 2.105, 2.015, 0.156, -3.9273, 5.21, 0.001, 4.014, -3.436, 8.92893, 6.7394];
+    // let unsorted: Vec<f32> = vec![6.7, 7.1, 1.0, -4.5, -1.9, 2.1, -2.2, 3.0, 2.3, 2.0, 0.0, -3.9, 5.2, 0.0, 4.0, -3.4, 8.9, 6.7];
+    // let unsorted: Vec<u32> = vec![6, 7, 1, 4, 1, 2, 2, 3, 2, 2, 0, 3, 5, 0, 4, 3, 8, 6];
+    // let unsorted: Vec<usize> = vec![6, 7, 1, 4, 1, 2, 2, 3, 2, 2, 0, 3, 5, 0, 4, 3, 8, 6];
+    // let unsorted: Vec<i32> = vec![6, 7, 1, -4, -1, 2, -2, 3, 2, 2, 0, -3, 5, 0, 4, -3, 8, 6];
+    let unsorted: Vec<isize> = vec![6, 7, 1, -4, -1, 2, -2, 3, 2, 2, 0, -3, 5, 0, 4, -3, 8, 6];
     let sorted = merge_sort(&unsorted);
 
     println!("MERGE SORT");
@@ -11,8 +16,12 @@ fn main() {
     println!("{:?}", sorted);
 }
 
-fn merge(mut left_half_array: Vec<i32>, mut right_half_array: Vec<i32>) -> Vec<i32> {
-    let mut result_array: Vec<i32> = Vec::new();
+fn merge<T>(mut left_half_array: Vec<T>, mut right_half_array: Vec<T>) -> Vec<T>
+    where T: 
+        std::ops::Mul<Output = T> +
+        std::cmp::PartialOrd +
+        Copy {
+    let mut result_array: Vec<T> = Vec::new();
     
     loop {
         if left_half_array.len() > 0
@@ -42,7 +51,11 @@ fn merge(mut left_half_array: Vec<i32>, mut right_half_array: Vec<i32>) -> Vec<i
     result_array
 }
 
-fn merge_sort(vec: &Vec<i32>) -> Vec<i32> {
+fn merge_sort<T>(vec: &Vec<T>) -> Vec<T> 
+    where T: 
+        std::ops::Mul<Output = T> +
+        std::cmp::PartialOrd +
+        Copy {
     let vec = vec.clone();
     let arr_len = vec.len() - 1 as usize;
     
@@ -52,13 +65,13 @@ fn merge_sort(vec: &Vec<i32>) -> Vec<i32> {
     } else {
         let middle: usize = arr_len / 2 as usize;
         
-        let mut left_half_array: Vec<i32> = Vec::new();
+        let mut left_half_array: Vec<T> = Vec::new();
         for i in 0..(middle + 1) {
             left_half_array.push(vec[i]);
         }
         left_half_array = merge_sort(&left_half_array);
         
-        let mut right_half_array: Vec<i32> = Vec::new();
+        let mut right_half_array: Vec<T> = Vec::new();
         for i in (middle + 1)..(arr_len + 1) {
             right_half_array.push(vec[i]);
         }
